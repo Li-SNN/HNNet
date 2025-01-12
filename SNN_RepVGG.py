@@ -1,6 +1,6 @@
 
 """
-@CreatedDate:   2022/04
+@CreatedDate:   2024/04
 @Author: lyh
 """
 import math
@@ -73,7 +73,6 @@ class TGRS(nn.Module):
         self.conv1 = nn.Conv2d(input_dim, 64, kernel_size=3, stride=1, padding=1, bias=bias_flag)
 
         self.conv1_w = nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1, bias=bias_flag)
-        # 第一个SSWRB
         self.conv2 = nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1, bias=bias_flag)
         self.conv3 = nn.Conv2d(128, 128, kernel_size=1, stride=1, padding=0, bias=bias_flag)
         self.BN1 = nn.BatchNorm2d(128)
@@ -93,9 +92,7 @@ class TGRS(nn.Module):
 
         self.pool2 = nn.AvgPool2d(kernel_size=2)
 
-        # self.fc1 = nn.Linear(6400, self.num_cls, bias=False)  # WHHU数据集需要变化channel为4096 spatial23
-        # self.fc1 = nn.Linear(4096, self.num_cls, bias=False)  # WHHU数据集需要变化channel为4096
-        self.fc1 = nn.Linear(4096, self.num_cls, bias=False)  # WHHU数据集需要变化channel为4096
+        self.fc1 = nn.Linear(4096, self.num_cls, bias=False)  
         self.softmax = nn.LogSoftmax(dim=-1)
 
         self.conv_list = [self.conv1, self.conv1_w,self.conv2, self.conv3,self.conv4, self.conv5,
